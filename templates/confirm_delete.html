@@ -1,0 +1,40 @@
+        {% extends "base2.html" %}
+        {% load staticfiles %}
+        {% load urlify %}
+        {% load crispy_forms_tags %}
+
+
+        {% block head_title %}
+        {{ instance.title }} | {{ block.super }}
+        {% endblock head_title %}
+
+
+
+        {% block content %}
+        <!--Mid Content Start-->
+
+
+     <section class="complete-content content-footer-space">
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <h1>Confirm Delete</h1>
+
+
+                        <form method="POST" action="."> {% csrf_token %}
+                            <p>A re you sure you want to delete: "{{ object.content }}"?</p>
+
+                            <input type='submit' value='Confirm' class='btn btn-warning'>
+                            <a href='{{ object.get_absolute_url }}' class='btn btn-default'>Cancel</a>
+                        </form>
+            </div>
+                    <hr/>
+
+
+
+
+  </section>
+
+
+
+    <!--Mid Content End-->
+           {% endblock content %}

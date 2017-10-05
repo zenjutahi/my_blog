@@ -1,0 +1,420 @@
+
+{% extends 'base2.html' %}
+{% load staticfiles %}
+{% load urlify %}
+{% load crispy_forms_tags %}
+
+
+{% block head_title %}
+{{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
+
+
+
+
+{% block content %}
+
+
+    <section class="complete-content content-footer-space">
+
+    <!--Mid Content Start-->
+    <div id="blog-full-width-post">
+
+     <div class="about-intro-wrap pull-left">
+
+     <div class="bread-crumb-wrap ibc-wrap-1">
+      <div class="container">
+    <!--Title / Beadcrumb-->
+          <div class="inner-page-title-wrap col-xs-12 col-md-12 col-sm-12">
+              <div class="bread-heading"><h1><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></h1></div>
+                <div class="bread-crumb pull-right">
+                <ul>
+                <li><a href="{% url 'posts:list' %}">PoophTags!</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                </ul>
+                </div>
+            </div>
+         </div>
+     </div>
+
+     
+     
+     
+    <div class="container">
+            <!--About-us top-content-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div id="blog-single-image-post">
+              <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+          <div class="col-md-12 col-xs-12 col-sm-12 pull-left subtitle no-pad ibg-transparent">{{ instance.title }}</div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 pull-left gallery-page-wrap no-pad">
+
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                          <!-- Indicators -->
+                          <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"><span class="paginate-gal"></span></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"><span class="paginate-gal"></span></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"><span class="paginate-gal"></span></li>
+                          </ol>
+
+                          <!-- Wrapper for slides -->
+                          {% if instance.image %}
+                          <div class="carousel-inner">
+
+                            <div class="item active">
+                              <img src="{{ instance.image.url }}" alt="">
+                              <div class="img-info-carousel">
+                                <div class="carousel-name">Abacterial Endocarditis</div><span class="icarousel-inn">Pediatric Clinic</span>
+                              </div>
+                            </div>
+
+
+                          </div>
+                          {% endif %}
+
+                          <!-- Controls -->
+                          <a class="left left-arrow carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="left-pageinate">&lt;</span>
+                          </a>
+                          <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="right-pageinate">></span>
+                          </a>
+                        </div>
+
+
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
+         <div class="blog-box-title">{{ title }} <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}</small></div>
+            <div class="post-meta">Author:
+                        {% if instance.user.get_full_name %}
+                        <span class="post-author ipost-author">{{ instance.user.get_full_name }}</span> {% endif %} |
+                        <span class="post-date">{{ instance.publish }} </span>|
+            <span class="post-author ipost-author">Read time: {% if instance.read_time <= 1 %} < 1 Minute {% else %}{{ instance.read_time }} minutes {% endif %}</span>|
+            <span class="post-author ipost-author"> 2 Comments</span>
+                        </div>
+                        <p class="para1">{{ instance.get_markdown }} </p>
+            </div>
+            <div class="col-lg-10 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 i-para no-pad">
+            <span class="border"></span>
+            <p class="para2"><em>orem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis vulputate hendrerit. Pellentesque eget diam mattis, pharetra neque vitae, iaculis mi.</em></p>
+</div>
+
+            <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad social-section social1-section">
+               <div class="col-lg-6 col-md-6  col-sm-12  col-xs-12 no-pad social-section1 pull-left">
+                <p class="para-color">Share This Story, Choose Your Platform!</p>
+               </div>
+               <div class="col-lg-6 col-md-6  col-sm-12  col-xs-12 no-pad social-section2 pull-right">
+               <div class="social-wrap-head col-md-12 no-pad ">
+                                <ul>
+                                <li><a href="#"><i class="icon-facebook head-social-icon" id="face-head" data-original-title="" title=""></i></a></li>
+                                <li><a href="#"><i class="icon-social-twitter head-social-icon" id="tweet-head" data-original-title="" title=""></i></a></li>
+                                <li><a href="#"><i class="icon-google-plus head-social-icon" id="gplus-head" data-original-title="" title=""></i></a></li>
+                                <li><a href="#"><i class="icon-linkedin head-social-icon" id="link-head" data-original-title="" title=""></i></a></li>
+                                <li><a href="#"><i class="icon-rss head-social-icon" id="rss-head" data-original-title="" title=""></i></a></li>
+                <li><a href="#"><i class="icon-twitter head-social-icon" id="twitter-head" data-original-title="" title=""></i></a></li>
+                                </ul>
+                            </div>
+               </div>
+            </div>
+           <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad post-authors">
+           <h2>About the Author: admin</h2>
+           <div class="post-item-wrap pull-left col-sm-6 col-lg-1 col-md-1 col-xs-12">
+                            <img src="{% static 'companies/images/news-2.jpg' %}" class="img-responsive post-author-img" alt="">
+                            </div>
+                                <div class=" col-lg-11 col-md-11 col-sm-12 col-xs-12 pull-right">
+                                  <p>Mauris sem lectus, tempor vitae augue a, posuere ultrices lacus. Suspendisse iaculis lacinia elit ac venenatis. Suspend isse in orci risus. Vivamus dictum et massa vitae feugiat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec nunc sapien, suscipit non placerat molestie, varius non est. Praesent nec augue vitae augue auctor lobortis non quis nunc.
+                                  </p>
+                            </div>
+
+           </div>
+            <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad contact-form-full post-detail-item">
+            <h2>Comments</h2><!--Start of comment section-->
+            {% if request.user.is_authenticated %}
+            <form class="contact2-page-form col-lg-12 col-sm-12 col-md-12 col-xs-12 no-pad contact-v1" id="contactForm" novalidate="novalidate" method="POST" action=".">{% csrf_token %}
+                            {{ comment_form|crispy }}
+                            <section class="color-7" id="btn-click">
+                <button class=" btn2-st2 btn-7 btn-7b"  value="Post comment" type="submit">Post Comment</button>
+                </section>
+            </form>
+            </div>
+            {% else %}
+            <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad social-section social1-section">
+                <div class="col-lg-6 col-md-6  col-sm-12  col-xs-12 no-pad social-section1 pull-left">
+                    <p class="para-color">You must login to comment!</p>
+                </div>
+            </div>
+            {% endif %}
+            <hr/>
+            {% for comment in comments %}
+        <blockquote><!--Parent comment-->
+            <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad post-authors">
+           <div class="post-item-wrap pull-left col-sm-6 col-lg-1 col-md-1 col-xs-12">
+                            <img src="{% static 'companies/images/news-2.jpg' %}" class="img-responsive post-author-img" alt="">
+                            </div>
+                                <div class=" col-lg-11 col-md-11 col-sm-12 col-xs-12 pull-right">
+                                  <p>{{ comment.content }}</p>
+                                   <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class="comment-reply-btn" href="#">Reply</a> | <a class="" href="{{ comment.get_absolute_url }}">Thread</a></footer>
+                                </div>
+            </div>
+        <div class="comment-reply">
+            {% for child_comment in comment.children %}<!--Child comment-->
+                <blockquote>
+                    <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad post-authors">
+                    <div class="post-item-wrap pull-left col-sm-6 col-lg-1 col-md-1 col-xs-12">
+                            <img src="{% static 'companies/images/news-2.jpg' %}" class="img-responsive post-author-img" alt="">
+                            </div>
+                                <div class=" col-lg-11 col-md-11 col-sm-12 col-xs-12 pull-right">
+                                  <p>{{ child_comment.content }}</p>
+                                  <footer>via {{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>
+                                </div>
+                    </div>
+                </blockquote>
+            {% endfor %}
+            {% if request.user.is_authenticated %}
+           <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad contact-form-full"><!--Start of reply section-->
+           <form class="contact2-page-form col-lg-12 col-sm-12 col-md-12 col-xs-12 no-pad contact-v1" id="contactForm" novalidate="novalidate" method="POST" action=".">{% csrf_token %}
+                            {{ comment_form|crispy }}
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                            <section class="color-7" id="btn-click">
+                <button class=" btn2-st2 btn-7 btn-7b" value="Post comment" type="submit">Post Comment</button>
+                </section>
+            </form>
+            </div>
+            {% else %}
+                <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad social-section social1-section">
+                    <div class="col-lg-6 col-md-6  col-sm-12  col-xs-12 no-pad social-section1 pull-left">
+                        <p class="para-color">You must login to comment!</p>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+        </blockquote>
+           <hr/>
+            {% endfor %}
+            </div>
+         </div>
+
+
+     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 side-bar-blog-bottom">
+
+                    <!--Sidebar-item-->
+                  <div class="catagory-list">
+
+                      <div class="side-blog-title">Catagories</div>
+                      <ul>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Doctors (3)</a></li>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Disease Outbreak (7)</a></li>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Types of Treatment (4)</a></li>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Medication Side Effects (5)</a></li>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Health and Fitness (2)</a></li>
+                        </ul>
+
+                  </div>
+
+                    <!--Sidebar-item-->
+                    <div class="post-tabs">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a href="#popular1" data-toggle="tab">Popular</a></li>
+                          <li><a href="#recent1" data-toggle="tab">Recent</a></li>
+                          <li><a href="#comment1" data-toggle="tab"><i class="icon-comments post-icon"></i>&nbsp;</a></li>
+
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+
+                           <!--popular posts-->
+                          <div class="tab-pane fade in active" id="popular1">
+
+                            <div class="popular-post-box">
+                                <img alt="" src="{% static 'companies/images/blog-dummy-1.png' %}" class="img-responsive pull-left" />
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                            <div class="popular-post-box">
+                                <img alt="" src="{% static 'companies/images/blog-dummy-1.png' %}" class="img-responsive pull-left" />
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                          </div><!--popular posts end-->
+
+                          <!--Recent posts-->
+                          <div class="tab-pane fade" id="recent1">
+
+                            <div class="popular-post-box">
+                                <img alt="" src="{% static 'companies/images/blog-dummy-1.png' %}" class="img-responsive pull-left" />
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                            <div class="popular-post-box">
+                                <img alt="" src="{% static 'companies/images/blog-dummy-1.png' %}" class="img-responsive pull-left" />
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                          </div><!--Recent posts End-->
+
+                          <!--Comments-->
+                          <div class="tab-pane fade" id="comment1">
+
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                          </div><!--Comments end-->
+
+                        </div><!-- Tab panes end-->
+
+                    </div><!-- side item-end -->
+
+                    <!--Sidebar-item-->
+                    <div class="twitter-widget">
+
+                        <div class="side-blog-title">Recent Tweets</div>
+
+                        <div class="tweets-box">
+                            <i class="icon-social-twitter tweets-box-icon"></i>
+                            <p> <span class="ipost-author">@jim_oliver</span>  Curabitur rhoncus lorem a tortor luctus mollis non bibendum nisl. Pellentesque eros massa.<br />
+                            <span class="date-post-widget"><a href="">2 days ago</a></span>
+                            </p>
+                        </div>
+
+                        <div class="tweets-box">
+                            <i class="icon-social-twitter tweets-box-icon"></i>
+                            <p> <span class="ipost-author">@jim_oliver</span>  Curabitur rhoncus lorem a tortor luctus mollis non bibendum nisl. Pellentesque eros massa.<br />
+                            <span class="date-post-widget"><a href="">2 days ago</a></span>
+                            </p>
+                        </div>
+
+                        <div class="tweets-box">
+                            <i class="icon-social-twitter tweets-box-icon"></i>
+                            <p> <span class="ipost-author">@jim_oliver</span>  Curabitur rhoncus lorem a tortor luctus mollis non bibendum nisl. Pellentesque eros massa.<br />
+                            <span class="date-post-widget"><a href="">2 days ago</a></span>
+                            </p>
+                        </div>
+
+                    </div> <!--Sidebar-item end-->
+
+                    <!--Sidebar-item-->
+                    <div class="tags-widget">
+
+                        <div class="side-blog-title">Tags</div>
+
+                        <ul>
+                        <li><a href="">Doctors</a></li>
+                        <li><a href="">nunc</a></li>
+                        <li><a href="">Disease</a></li>
+                        <li><a href="">fermentum</a></li>
+                        <li><a href="">loremin</a></li>
+                        <li><a href="">haaoti</a></li>
+                        <li><a href="">vestibulumes</a></li>
+                        <li><a href="">tortor</a></li>
+                        <li><a href="">fila</a></li>
+                        </ul>
+
+                    </div><!--Sidebar-item end-->
+
+                    <!--Sidebar-item-->
+                    <div class="form-widget">
+
+                      <div class="appointment-form-title"><i class="icon-hospital2 appointment-form-icon"></i>Book An Appointment</div>
+                        <form class="appt-form">
+                        <select class="appt-form-select">
+                        <option>Select Department</option>
+                        <option>Select Department</option>
+                        <option>Select Department</option>
+                        <option>Select Department</option>
+                        </select>
+                        <input type="text" class="appt-form-txt" placeholder="First Name(required)" />
+                        <input type="text" class="appt-form-txt" placeholder="Last Name" />
+                        <input type="text" class="appt-form-txt" placeholder="Phone(required)" />
+                        <input type="email" class="appt-form-txt" placeholder="Email(required)" />
+                        <input type="date" class="appt-form-txt" />
+                         <section class="color-7" id="btn-click1">
+                <button class="icon-mail btn2-st2 btn-7 btn-7b iform-button-60">Submit</button>
+                </section>
+                        </form>
+
+                    </div><!--Sidebar-item end-->
+
+                    <!--Sidebar-item-->
+                    <div class="collapse-widget-side">
+
+                        <div id="accordion-blog2">
+
+
+
+                            <h3><i class="collapse-cheveron"></i><span class="blog-collapse-title">Outpatient Rehab</span></h3>
+                            <div>
+                               <div class="collapse-widget-content pull-left">
+                                <div class="dept-title pull-left">Donec scelerisque</div>
+                             <p>Lorem ipsum dolor sit amet, consecte tur adipiscing elitut eu nisl quis augue suscipit dignissim. Duis vulputate nisl sit amet feugiat tincidunt. vulputate nisl sit amet feugiat tincidunt.</p>
+                                </div>
+                            </div>
+
+                            <h3><i class="collapse-cheveron"></i><span class="blog-collapse-title">Ophthalmology Clinic</span></h3>
+                            <div>
+                                <div class="collapse-widget-content pull-left">
+                                <div class="dept-title pull-left">Donec scelerisque</div>
+                             <p>Lorem ipsum dolor sit amet, consecte tur adipiscing elitut eu nisl quis augue suscipit dignissim. Duis vulputate nisl sit amet feugiat tincidunt. vulputate nisl sit amet feugiat tincidunt. vulputate nisl sit amet feugiat tincidunt.</p>
+                                </div>
+                            </div>
+
+                            <h3 class="last-tab"><i class="collapse-cheveron"></i><span class="blog-collapse-title">Outpatient Surgery</span></h3>
+                            <div>
+                                <div class="collapse-widget-content pull-left">
+                                <div class="dept-title pull-left">Donec scelerisque</div>
+                             <p>Lorem ipsum dolor sit amet, consecte tur adipiscing elitut eu nisl quis augue suscipit dignissim. Duis vulputate nisl sit amet feugiat tincidunt. vulputate nisl sit amet feugiat tincidunt. vulputate nisl sit amet feugiat tincidunt. vulputate nisl sit amet feugiat tincidunt.</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+               </div>
+         </div>
+     </div>
+         </div><!--end-container-->
+         </div>
+    <!--Mid Content End-->
+
+
+
+      <!--Footer Start-->
+
+    </section>
+    {% endblock content %}

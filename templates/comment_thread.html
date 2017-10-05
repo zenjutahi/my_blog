@@ -1,0 +1,64 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+
+{% load urlify %}
+{% load crispy_forms_tags %}
+
+
+{% block head_title %}
+{{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
+
+
+
+{% block content %}
+{{ object }}
+
+
+
+
+    <section class="complete-content content-footer-space">
+
+
+
+            <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad post-authors">
+           <div class="post-item-wrap pull-left col-sm-6 col-lg-1 col-md-1 col-xs-12">
+                            <img src="{% static 'companies/images/news-2.jpg' %}" class="img-responsive post-author-img" alt="">
+                            </div>
+                                <div class=" col-lg-11 col-md-11 col-sm-12 col-xs-12 pull-right">
+                                  <p>{{ comment.content }}</p>
+                                   <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} {% endif %} {% if request.user == comment.user %}<a href='{{ comment.get_delete_url }}'>Delete</a> {% endif %}</footer>
+                                </div>
+            </div>
+            {% for child_comment in comment.children %}<!--Child comment-->
+                <blockquote>
+                    <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad post-authors">
+                    <div class="post-item-wrap pull-left col-sm-6 col-lg-1 col-md-1 col-xs-12">
+                            <img src="{% static 'companies/images/news-2.jpg' %}" class="img-responsive post-author-img" alt="">
+                            </div>
+                                <div class=" col-lg-11 col-md-11 col-sm-12 col-xs-12 pull-right">
+                                <p>{{ child_comment.content }}</p>
+                          <footer>via {{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago | {% if request.user == child_comment.user %}<a href='{{ child_comment.get_delete_url }}'>Delete</a>{% endif %}</footer>
+                                </div>
+                    </div>
+                </blockquote>
+            {% endfor %}
+            {% if request.user.is_authenticated %}
+           <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad contact-form-full"><!--Start of reply section-->
+           <form class="contact2-page-form col-lg-12 col-sm-12 col-md-12 col-xs-12 no-pad contact-v1" id="contactForm" novalidate="novalidate" method="POST" action=".">{% csrf_token %}
+                            {{ comment_form|crispy }}
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                            <section class="color-7" id="btn-click">
+                <button class=" btn2-st2 btn-7 btn-7b" data-loading-text="Loading..." type="submit">Post Comment</button>
+                </section>
+            </form>
+            </div>
+            {% else %}
+                <div class="col-lg-12 col-md-12  col-sm-12  col-xs-12 no-pad social-section social1-section">
+                    <div class="col-lg-6 col-md-6  col-sm-12  col-xs-12 no-pad social-section1 pull-left">
+                        <p class="para-color">You must login to comment!</p>
+                    </div>
+                </div>
+            {% endif %}
+    </section>
+        {% endblock content %}

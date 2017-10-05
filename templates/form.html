@@ -1,0 +1,71 @@
+
+        {% extends 'base2.html' %}
+        {% load crispy_forms_tags %}
+        {% load staticfiles %}
+
+
+        {% block content %}
+        <!--Mid Content Start-->
+
+
+     <section class="complete-content content-footer-space">
+
+     <div class="about-intro-wrap pull-left">
+
+     <div class="bread-crumb-wrap ibc-wrap-2">
+    	<div class="container">
+    <!--Title / Beadcrumb-->
+         	<div class="inner-page-title-wrap col-xs-12 col-md-12 col-sm-12">
+            	<div class="bread-heading"><h1>{{ title }}</h1></div>
+                <div class="bread-crumb pull-right">
+                <ul>
+                <li><a href="{% url 'posts:list' %}">PoophTags!</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                </ul>
+                </div>
+            </div>
+         </div>
+     </div>
+
+         <div class="container">
+
+
+
+
+            <!--About-us top-content-->
+
+          <div class="row">
+
+
+        	<div class="col-md-12 col-xs-12 col-sm-12 pull-left full-content wow fadeInLeft animated" data-wow-delay="0.3s" data-wow-offset="130">
+            <div class="full-content-title">{{ title }}</div>
+            </div>
+
+
+
+             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                 <h1>{{ title }} Form</h1>
+                <hr/>
+
+                <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+                {{ form|crispy }}
+                <section class="color-7" id="btn-click">
+                <button class=" btn2-st2 btn-7 btn-7b" data-loading-text="Loading..." type="submit">{{ title }}</button>
+                </section>
+                </form>
+
+
+
+         </div> <!--Mid Services End-->
+
+         </div>
+
+         </div>
+         </div>
+
+  </section>
+
+
+
+    <!--Mid Content End-->
+           {% endblock content %}

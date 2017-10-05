@@ -1,0 +1,83 @@
+
+        {% extends 'base2.html' %}
+        {% load crispy_forms_tags %}
+        {% load staticfiles %}
+
+        {% block head_extra %}
+        {{ form.media }}
+        {% endblock head_extra %}
+
+        {% block content %}
+        <!--Mid Content Start-->
+
+
+     <section class="complete-content content-footer-space">
+
+     <div class="about-intro-wrap pull-left">
+
+     <div class="bread-crumb-wrap ibc-wrap-2">
+        <div class="container">
+    <!--Title / Beadcrumb-->
+            <div class="inner-page-title-wrap col-xs-12 col-md-12 col-sm-12">
+                <div class="bread-heading"><h1>Create Your Posts</h1></div>
+                <div class="bread-crumb pull-right">
+                <ul>
+                <li><a href='{% url "posts:list" %}'>PoophTags!</a></li>
+                <li><a href='{% url "posts:create" %}'>Create Post</a></li>
+                <li><a href='{% url "logout" %}'>Logout</a></li>
+                </ul>
+                </div>
+            </div>
+         </div>
+     </div>
+
+         <div class="container">
+
+
+
+
+            <!--About-us top-content-->
+
+          <div class="row">
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 top-pad wow fadeInLeft animated" data-wow-delay="0.5s">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="full-content-title"><h1>Preview</h1></div>
+                <hr/>
+                <div class='content-preview'>
+                    <h3 id='preview-title'></h3>
+                    <p id='preview-content'></p>
+                </div>
+            
+            </div>
+
+
+
+             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 no-pad">
+                 <h1>Form</h1>
+                <hr/>
+
+                <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+                {{ form|crispy }}
+                <section class="color-7" id="btn-click">
+                <button class=" btn2-st2 btn-7 btn-7b" data-loading-text="Loading..." type="submit">Create Post</button>
+                </section>
+                </form>
+
+
+
+         </div> <!--Mid Services End-->
+
+         </div>
+
+         </div>
+         </div>
+         </div>
+
+  </section>
+
+
+
+    <!--Mid Content End-->
+           {% endblock content %}

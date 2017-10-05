@@ -1,0 +1,282 @@
+{% extends 'base2.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+    <section class="complete-content content-footer-space">
+
+    <!--Mid Content Start-->
+
+
+     <div class="about-intro-wrap pull-left">
+
+         <div class="bread-crumb-wrap ibc-wrap-3">
+        <div class="container">
+    <!--Title / Beadcrumb-->
+            <div class="inner-page-title-wrap col-xs-12 col-md-12 col-sm-12">
+                <div class="bread-heading"><h1>{{ title }}</h1></div>
+                <div class="bread-crumb pull-right">
+                <ul>
+                <li><a href="{% url 'posts:list' %}">PoophTags!</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                </ul>
+                </div>
+            </div>
+         </div>
+         </div>
+     </div>
+
+         <div class="container">
+
+
+
+            <!--About-us top-content-->
+
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pull-left blgo-full-wrap no-pad">
+                <div id="blog-medium-left">
+
+               <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div id="blog-medium-left"><!--blog-medium-left-->
+
+                {% for obj in object_list %}
+                <div class="row  margin-top border-bottom">
+                {% if obj.image %}
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <!-- Blog box -->
+                    <div class="blog-box wow fadeInDown" data-wow-delay="0.5s" data-wow-offset="0">
+                        <img alt="" src="{{ obj.image.url }}" class="img-responsive" />
+
+                    </div>
+                </div>
+                {% endif %}
+                {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 fadeInDown wow">
+
+                        <div class="blog-box-title"><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></div>
+                        <div class="post-meta">By 
+                        <span class="post-author ipost-author">{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}</span> |
+                        <span class="post-date">{{ obj.publish }}</span>|
+                        <span class="post-author ipost-author">2 Comments</span>
+                        </div>
+                        <div class="post-para">
+                        <p>{{ obj.get_markdown|truncatechars_html:220 }}</p>
+                        </div><!--end-post-para-->
+                        <div class="r-more">
+                        <a href="{{ obj.get_absolute_url }}">Read More ></a>
+                        </div>
+                        </div>
+
+                </div><!--end-row-->
+                {% endfor %}
+                
+        <div class="pagination side-blog-title">
+            <span class="step-links">
+                {% if object_list.has_previous %}
+                    <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                </span>
+
+                {% if object_list.has_next %}
+                    <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                {% endif %}
+            </span>
+        </div>
+            </div><!--end-blog-medium-->
+            </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left side-bar-blog-bottom">
+
+                    <!--Sidebar-item-->
+                    <div class="catagory-list">
+
+                        <div class="side-blog-title">Catagories</div>
+                        <ul>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Doctors (3)</a></li>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Disease Outbreak (7)</a></li>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Types of Treatment (4)</a></li>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Medication Side Effects (5)</a></li>
+                        <li><a href=""><i class="fa fa-angle-right about-list-arrows"></i>Health and Fitness (2)</a></li>
+                        </ul>
+
+                    </div>
+
+                    <!--Sidebar-item-->
+                    <div class="post-tabs">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a href="#popular1" data-toggle="tab">Popular</a></li>
+                          <li><a href="#recent1" data-toggle="tab">Recent</a></li>
+                          <li><a href="#comment1" data-toggle="tab"><i class="icon-comments post-icon"></i>&nbsp;</a></li>
+
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+
+                           <!--popular posts-->
+                          <div class="tab-pane fade in active" id="popular1">
+
+                            <div class="popular-post-box">
+                                <img alt="" src="{% static 'companies/images/blog-dummy-1.png' %}" class="img-responsive pull-left" />
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                            <div class="popular-post-box">
+                                <img alt="" src="{% static 'companies/images/blog-dummy-1.png' %}" class="img-responsive pull-left" />
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                          </div><!--popular posts end-->
+
+                          <!--Recent posts-->
+                          <div class="tab-pane fade" id="recent1">
+
+                            <div class="popular-post-box">
+                                <img alt="" src="{% static 'companies/images/blog-dummy-1.png' %}" class="img-responsive pull-left" />
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                            <div class="popular-post-box">
+                                <img alt="" src="{% static 'companies/images/blog-dummy-1.png' %}" class="img-responsive pull-left" />
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                          </div><!--Recent posts End-->
+
+                          <!--Comments-->
+                          <div class="tab-pane fade" id="comment1">
+
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+                            <div class="popular-post-box">
+
+                                <div class="post-title-side">Etiam tristique niba</div>
+                                <div class="post-date-side">April, 7th, 2014</div>
+                            </div>
+
+                          </div><!--Comments end-->
+
+                        </div><!-- Tab panes end-->
+
+                    </div><!-- side item-end -->
+
+                    <!--Sidebar-item-->
+                    <div class="twitter-widget">
+
+                        <div class="side-blog-title">Recent Tweets</div>
+
+                        <div class="tweets-box">
+                            <i class="icon-social-twitter tweets-box-icon"></i>
+                            <p> <span class="ipost-author">@jim_oliver</span>  Curabitur rhoncus lorem a tortor luctus mollis non bibendum nisl. Pellentesque eros massa.<br />
+                            <span class="date-post-widget"><a href="">2 days ago</a></span>
+                            </p>
+                        </div>
+
+                        <div class="tweets-box">
+                            <i class="icon-social-twitter tweets-box-icon"></i>
+                            <p> <span class="ipost-author">@jim_oliver</span>  Curabitur rhoncus lorem a tortor luctus mollis non bibendum nisl. Pellentesque eros massa.<br />
+                            <span class="date-post-widget"><a href="">2 days ago</a></span>
+                            </p>
+                        </div>
+
+                        <div class="tweets-box">
+                            <i class="icon-social-twitter tweets-box-icon"></i>
+                            <p> <span class="ipost-author">@jim_oliver</span>  Curabitur rhoncus lorem a tortor luctus mollis non bibendum nisl. Pellentesque eros massa.<br />
+                            <span class="date-post-widget"><a href="">2 days ago</a></span>
+                            </p>
+                        </div>
+
+                    </div> <!--Sidebar-item end-->
+
+                    <!--Sidebar-item-->
+                    <div class="tags-widget">
+
+                        <div class="side-blog-title">Tags</div>
+
+                        <ul>
+                        <li><a href="">Doctors</a></li>
+                        <li><a href="">nunc</a></li>
+                        <li><a href="">Disease</a></li>
+                        <li><a href="">fermentum</a></li>
+                        <li><a href="">loremin</a></li>
+                        <li><a href="">haaoti</a></li>
+                        <li><a href="">vestibulumes</a></li>
+                        <li><a href="">tortor</a></li>
+                        <li><a href="">fila</a></li>
+                        </ul>
+
+                    </div><!--Sidebar-item end-->
+
+                    <!--Sidebar-item-->
+                    <div class="form-widget">
+
+                        <div class="appointment-form-title"><i class="icon-hospital2 appointment-form-icon"></i>Book An Appointment</div>
+                        <form class="appt-form">
+                        <select class="appt-form-select">
+                        <option>Select Department</option>
+                        <option>Select Department</option>
+                        <option>Select Department</option>
+                        <option>Select Department</option>
+                        </select>
+                        <input type="text" class="appt-form-txt" placeholder="First Name(required)" />
+                        <input type="text" class="appt-form-txt" placeholder="Last Name" />
+                        <input type="text" class="appt-form-txt" placeholder="Phone(required)" />
+                        <input type="email" class="appt-form-txt" placeholder="Email(required)" />
+                        <input type="date" class="appt-form-txt" />
+                         <section class="color-7" id="btn-click1">
+                <button class="icon-mail btn2-st2 btn-7 btn-7b iform-button-60">Submit</button>
+                </section>
+                        </form>
+
+                    </div><!--Sidebar-item end-->
+
+
+
+
+               </div>
+                </div><!--end-blog-medium-left-->
+
+                </div>
+
+         </div>
+         </div>
+
+    <!--Mid Content End-->
+         </div>
+
+
+        <!--Footer Start-->
+
+    </section>
+
+{% endblock content %}
